@@ -6,4 +6,3 @@ seaborn
 ipywidgets
 tqdm
 os
-
