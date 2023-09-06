@@ -30,7 +30,7 @@ plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title(
     'Change of heterotroph densitiy \n $d_{H_{max}} = 10^{-2}$, H2 invader')
-plt.savefig('./output/invasion_H1-H2_growthrate_'+str(d_Hmax)+'.png')
+plt.savefig('./output/invasion_growthrate_'+str(d_Hmax)+'_H1-H2.png')
 
 # H1 change
 fig, ax2 = plt.subplots()
@@ -48,7 +48,7 @@ plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title('Growth rate of $H_1$ \n $d_{H_{max}} = 10^{-2}$, H2 invader')
-plt.savefig('./output/invasion_H1_growthrate_'+str(d_Hmax)+'.png')
+plt.savefig('./output/invasion_growthrate_'+str(d_Hmax)+'_H1.png')
 
 # H2 change
 fig, ax3 = plt.subplots()
@@ -66,4 +66,4 @@ plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title('Growth rate of $H_2$ \n $d_{H_{max}} = 10^{-2}$, H2 invader')
-plt.savefig('./output/invasion_H2_growthrate_'+str(d_Hmax)+'.png')
+plt.savefig('./output/invasion_growthrate_'+str(d_Hmax)+'_H2.png')
