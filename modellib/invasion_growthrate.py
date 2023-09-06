@@ -6,12 +6,12 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 ###
 
-H1a = np.loadtxt("./data/growthrate10-2/H1a.csv", delimiter=",")
-H1b = np.loadtxt("./data/growthrate10-2/H1b.csv", delimiter=",")
-H2a = np.loadtxt("./data/growthrate10-2/H2a.csv", delimiter=",")
-H2b = np.loadtxt("./data/growthrate10-2/H2b.csv", delimiter=",")
+H1a = np.loadtxt("./data/growthrate10-3/H1a.csv", delimiter=",")
+H1b = np.loadtxt("./data/growthrate10-3/H1b.csv", delimiter=",")
+H2a = np.loadtxt("./data/growthrate10-3/H2a.csv", delimiter=",")
+H2b = np.loadtxt("./data/growthrate10-3/H2b.csv", delimiter=",")
 
-d_Hmax = "10-2"
+d_Hmax = "10-3"
 k_1_range = np.geomspace(0.1, 10, 50)
 ticks = np.append(k_1_range, 10)
 
@@ -29,7 +29,7 @@ plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title(
-    'Change of heterotroph densitiy \n $d_{H_{max}} = 10^{-2}$, H2 invader')
+    'Change of heterotroph densitiy \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
 plt.savefig('./output/invasion_growthrate_'+str(d_Hmax)+'_H1-H2.png')
 
 # H1 change
@@ -47,7 +47,7 @@ ax2.set_yticklabels(("$10^{-1}$", "$10^{0}$", "$10^{1}$"))
 plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
-plt.title('Growth rate of $H_1$ \n $d_{H_{max}} = 10^{-2}$, H2 invader')
+plt.title('Growth rate of $H_1$ \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
 plt.savefig('./output/invasion_growthrate_'+str(d_Hmax)+'_H1.png')
 
 # H2 change
@@ -65,5 +65,5 @@ ax3.set_yticklabels(("$10^{-1}$", "$10^{0}$", "$10^{1}$"))
 plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
-plt.title('Growth rate of $H_2$ \n $d_{H_{max}} = 10^{-2}$, H2 invader')
+plt.title('Growth rate of $H_2$ \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
 plt.savefig('./output/invasion_growthrate_'+str(d_Hmax)+'_H2.png')
