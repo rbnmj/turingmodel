@@ -67,13 +67,13 @@ from turing_model import TuringModel as tm
 #np.savetxt("./data/invasion10-3.csv", invasion, delimiter=",")
 
 # # load sim results
-invasion = np.loadtxt("./data/invasion10-2.csv", delimiter=",")
+invasion = np.loadtxt("./data/invasion10-3.csv", delimiter=",")
+d_Hmax = "10-3"
 
 # plotting 
-d_Hmax = "10-2"
 k_1_range = np.geomspace(0.1, 10, 50)
 ticks = np.append(k_1_range, 10)
-ax1 = sns.heatmap(invasion, cmap="BrBG", vmin=-0.4,vmax=0.4, square = True,cbar=False) # vmin=-0.4,vmax=0.4,    
+ax1 = sns.heatmap(invasion, cmap="viridis", vmin=-0.4,vmax=0.4, square = True,cbar=False) # vmin=-0.4,vmax=0.4,    
 cbar = ax1.figure.colorbar(ax1.collections[0])
 cbar.set_label('$H_1 - H_2$', rotation=270)
 ax1.set_xticks(np.linspace(0, len(k_1_range), 3))
