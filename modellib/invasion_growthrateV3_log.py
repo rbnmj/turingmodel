@@ -44,8 +44,8 @@ k_1_range = np.geomspace(0.1, 10, 50)
 k_2_range = np.geomspace(0.1, 10, 50)
 
 # maximum dispersal rate
-d_Hmax1 = 10**-3
-d_Hmax2 = 10**-3
+d_Hmax1 = 10**-2
+d_Hmax2 = 10**-2
 
 # var = [N_a, N_b, A_a, A_b, H_1a, H_1b, H_2a, H_2b]
 var0 = [2, 2.5, 2.5, 2, 0.08, 0.4, 10**-6, 0, 0, 0, 0, 0, 0, 0]
@@ -68,12 +68,12 @@ for k_2 in tqdm(k_2_range):
         model = tm(var0, t, k_1, k_2, d_Hmax1, d_Hmax2)
         var = integ.odeint(tm.equations_wrapper, var0, t, args=(model,))
 
-        H1_extr.append(find_maxima(var[:, 4]+var[:, 5],num_extr))
-        H2_extr.append(find_maxima(var[:, 6]+var[:, 6],num_extr))
+        H1_extr.append(find_maxima(np.log(var[:, 4])+np.log(var[:, 5]),num_extr))
+        H2_extr.append(find_maxima(np.log(var[:, 6])+np.log(var[:, 6]),num_extr))
 
         # results[i,j] = ...
-        slopeH1[i, j] = linregress(np.linspace(0, 9, 10),np.log(H1_extr[0][10:num_extr]))[0]
-        slopeH2[i, j] = linregress(np.linspace(0, 9, 10),np.log(H2_extr[0][10:num_extr]))[0]
+        slopeH1[i, j] = linregress(np.linspace(0, 9, 10),H1_extr[0][10:num_extr])[0]
+        slopeH2[i, j] = linregress(np.linspace(0, 9, 10),H2_extr[0][10:num_extr])[0]
 
         # workaround to empty lists
         H1_extr = []
@@ -83,14 +83,14 @@ for k_2 in tqdm(k_2_range):
     i += 1
 
 # saving results
-np.savetxt("./data/growthrateV3_10-3/H1Slope10-3_log.csv", slopeH1, delimiter=",")
-np.savetxt("./data/growthrateV3_10-3/H2Slope10-3_log.csv", slopeH2, delimiter=",")
+np.savetxt("./data/growthrateV3_10-3/H1Slope10-2_log2.csv", slopeH1, delimiter=",")
+np.savetxt("./data/growthrateV3_10-3/H2Slope10-2_log2.csv", slopeH2, delimiter=",")
 
 # # loading results
-# slopeH1 = np.loadtxt("./data/growthrateV3_10-3/H1Slope10-3.csv", delimiter=",")
-# slopeH2 = np.loadtxt("./data/growthrateV3_10-3/H2Slope10-3.csv", delimiter=",")
+# slopeH1 = np.loadtxt("./data/growthrateV3_10-3/H1Slope10-3_log2.csv", delimiter=",")
+# slopeH2 = np.loadtxt("./data/growthrateV3_10-3/H2Slope10-3_log2.csv", delimiter=",")
 
-d_Hmax = "10-3"
+d_Hmax = "10-2"
 
 # plotting
 k_1_range = np.geomspace(0.1, 10, 50)
@@ -98,7 +98,7 @@ ticks = np.append(k_1_range, 10)
 
 # total change
 fig, ax1 = plt.subplots()
-ax1 = sns.heatmap((slopeH1-slopeH2), cmap="BrBG", square=True, cbar=False)#, vmin=-10**-7, vmax=10**-7)
+ax1 = sns.heatmap((slopeH1-slopeH2), cmap="BrBG", square=True, cbar=False)
 cbar1 = ax1.figure.colorbar(ax1.collections[0])
 cbar1.set_label('$H_1 - H_2$', rotation=270, labelpad=12)
 ax1.set_xticks(np.linspace(0, len(k_1_range), 3))
@@ -111,7 +111,7 @@ plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title(
     'Change of heterotroph densitiy \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
-plt.savefig('./output/invasion_growthrateV3_'+str(d_Hmax)+'_H1-H2_log.png')
+plt.savefig('./output/turingtalk230926/invasion_growthrateV3_'+str(d_Hmax)+'_H1-H2_log.png')
 
 # H1 change
 fig, ax2 = plt.subplots()
@@ -129,13 +129,13 @@ plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title('Growth rate of $H_1$ \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
-plt.savefig('./output/invasion_growthrateV3_'+str(d_Hmax)+'_H1_log.png')
+plt.savefig('./output/turingtalk230926/invasion_growthrateV3_'+str(d_Hmax)+'_H1_log.png')
 
 # H2 change
 fig, ax3 = plt.subplots()
 k_1_range = np.geomspace(0.1, 10, 50)
 ticks = np.append(k_1_range, 10)
-ax3 = sns.heatmap((slopeH2), cmap="BrBG", square=True, cbar=False)#, vmin=-10**-9, vmax=10**-9)
+ax3 = sns.heatmap((slopeH2), cmap="BrBG", square=True, cbar=False, vmin=-0.04, vmax=0.04)
 cbar3 = ax3.figure.colorbar(ax3.collections[0])
 cbar3.set_label('$H_2$', rotation=270, labelpad=12)
 ax3.set_xticks(np.linspace(0, len(k_1_range), 3))
@@ -147,4 +147,4 @@ plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title('Growth rate of $H_2$ \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
-plt.savefig('./output/invasion_growthrateV3_'+str(d_Hmax)+'_H2_log.png')
+plt.savefig('./output/turingtalk230926/sinvasion_growthrateV3_'+str(d_Hmax)+'_H2_log.png')
