@@ -7,88 +7,88 @@ import seaborn as sns
 ###
 
 
-# running sim
-from scipy.stats import linregress
-import ipywidgets
-from tqdm import tqdm
-from scipy import integrate as integ
-from scipy import signal as signal
-import sys
-sys.path.append('./')
-from turing_model import TuringModel as tm
+# # running sim
+# from scipy.stats import linregress
+# import ipywidgets
+# from tqdm import tqdm
+# from scipy import integrate as integ
+# from scipy import signal as signal
+# import sys
+# sys.path.append('./')
+# from turing_model import TuringModel as tm
 
-def find_maxima(x,n):
-    """ returns an array with n extreme values of x"""
+# def find_maxima(x,n):
+#     """ returns an array with n extreme values of x"""
     
-    max_index = signal.argrelmax(x)[0]         # create array with indices of local maxima of x
+#     max_index = signal.argrelmax(x)[0]         # create array with indices of local maxima of x
     
-    #ext_index = np.append(max_index)           # array with indices of local extrema in x
-    #ext_index = np.sort(ext_index)             # sort array (alternating minima and maxima)
-    extrema = x[max_index]                     # array with the actual values of the extrema
+#     #ext_index = np.append(max_index)           # array with indices of local extrema in x
+#     #ext_index = np.sort(ext_index)             # sort array (alternating minima and maxima)
+#     extrema = x[max_index]                     # array with the actual values of the extrema
        
-    if len(extrema) == 0:                      # if all values in x are the same and no extremum is found:
-        extrema = np.append(extrema,x[-1])     #   return last value of x in this case
-    while len(extrema) < n:                    # if less than n extrema have been found:
-        extrema = np.append(extrema,extrema[0])#   repeat last extremum until array has n elements
-    while len(extrema) > n:                    # if more than n extrema have been found:
-        extrema = np.delete(extrema,-1)        #   delete elements until arrays has n elements
+#     if len(extrema) == 0:                      # if all values in x are the same and no extremum is found:
+#         extrema = np.append(extrema,x[-1])     #   return last value of x in this case
+#     while len(extrema) < n:                    # if less than n extrema have been found:
+#         extrema = np.append(extrema,extrema[0])#   repeat last extremum until array has n elements
+#     while len(extrema) > n:                    # if more than n extrema have been found:
+#         extrema = np.delete(extrema,-1)        #   delete elements until arrays has n elements
         
-    return extrema
+#     return extrema
 
-t_end = 10000 
-number_steps = 10000 
-t = np.linspace(0, t_end, number_steps)
+# t_end = 10000 
+# number_steps = 10000 
+# t = np.linspace(0, t_end, number_steps)
 
-# dispersal adaptability
-k_1_range = np.geomspace(0.1, 10, 50)
-k_2_range = np.geomspace(0.1, 10, 50)
+# # dispersal adaptability
+# k_1_range = np.geomspace(0.1, 10, 50)
+# k_2_range = np.geomspace(0.1, 10, 50)
 
-# maximum dispersal rate
-d_Hmax1 = 10**-2
-d_Hmax2 = 10**-2
+# # maximum dispersal rate
+# d_Hmax1 = 10**-2
+# d_Hmax2 = 10**-2
 
-# var = [N_a, N_b, A_a, A_b, H_1a, H_1b, H_2a, H_2b]
-var0 = [2, 2.5, 2.5, 2, 0.08, 0.4, 10**-6, 0, 0, 0, 0, 0, 0, 0]
+# # var = [N_a, N_b, A_a, A_b, H_1a, H_1b, H_2a, H_2b]
+# var0 = [2, 2.5, 2.5, 2, 0.08, 0.4, 10**-6, 0, 0, 0, 0, 0, 0, 0]
 
-num_extr = 20 # set number of maxima to be found
+# num_extr = 20 # set number of maxima to be found
 
-H1_extr = []
-H2_extr = []
+# H1_extr = []
+# H2_extr = []
 
-slopeH1 = np.zeros((len(k_1_range), len(k_2_range)))
-slopeH2 = np.zeros((len(k_1_range), len(k_2_range)))
-var = []
+# slopeH1 = np.zeros((len(k_1_range), len(k_2_range)))
+# slopeH2 = np.zeros((len(k_1_range), len(k_2_range)))
+# var = []
 
-i = 0
-j = 0
+# i = 0
+# j = 0
 
-for k_2 in tqdm(k_2_range):
-    j = 0
-    for k_1 in k_1_range:
-        model = tm(var0, t, k_1, k_2, d_Hmax1, d_Hmax2)
-        var = integ.odeint(tm.equations_wrapper, var0, t, args=(model,))
+# for k_2 in tqdm(k_2_range):
+#     j = 0
+#     for k_1 in k_1_range:
+#         model = tm(var0, t, k_1, k_2, d_Hmax1, d_Hmax2)
+#         var = integ.odeint(tm.equations_wrapper, var0, t, args=(model,))
 
-        H1_extr.append(find_maxima(np.log(var[:, 4])+np.log(var[:, 5]),num_extr))
-        H2_extr.append(find_maxima(np.log(var[:, 6])+np.log(var[:, 6]),num_extr))
+#         H1_extr.append(find_maxima(np.log(var[:, 4])+np.log(var[:, 5]),num_extr))
+#         H2_extr.append(find_maxima(np.log(var[:, 6])+np.log(var[:, 6]),num_extr))
 
-        # results[i,j] = ...
-        slopeH1[i, j] = linregress(np.linspace(0, 9, 10),H1_extr[0][10:num_extr])[0]
-        slopeH2[i, j] = linregress(np.linspace(0, 9, 10),H2_extr[0][10:num_extr])[0]
+#         # results[i,j] = ...
+#         slopeH1[i, j] = linregress(np.linspace(0, 9, 10),H1_extr[0][10:num_extr])[0]
+#         slopeH2[i, j] = linregress(np.linspace(0, 9, 10),H2_extr[0][10:num_extr])[0]
 
-        # workaround to empty lists
-        H1_extr = []
-        H2_extr = []
+#         # workaround to empty lists
+#         H1_extr = []
+#         H2_extr = []
 
-        j += 1
-    i += 1
+#         j += 1
+#     i += 1
 
-# saving results
-np.savetxt("./data/growthrateV3_10-3/H1Slope10-2_log2.csv", slopeH1, delimiter=",")
-np.savetxt("./data/growthrateV3_10-3/H2Slope10-2_log2.csv", slopeH2, delimiter=",")
+# # saving results
+# np.savetxt("./data/growthrateV3_10-2/H1Slope10-2_log2.csv", slopeH1, delimiter=",")
+# np.savetxt("./data/growthrateV3_10-2/H2Slope10-2_log2.csv", slopeH2, delimiter=",")
 
-# # loading results
-# slopeH1 = np.loadtxt("./data/growthrateV3_10-3/H1Slope10-3_log2.csv", delimiter=",")
-# slopeH2 = np.loadtxt("./data/growthrateV3_10-3/H2Slope10-3_log2.csv", delimiter=",")
+# loading results
+slopeH1 = np.loadtxt("./data/growthrateV3_10-2/H1Slope10-2_log2.csv", delimiter=",")
+slopeH2 = np.loadtxt("./data/growthrateV3_10-2/H2Slope10-2_log2.csv", delimiter=",")
 
 d_Hmax = "10-2"
 
@@ -135,7 +135,7 @@ plt.savefig('./output/turingtalk230926/invasion_growthrateV3_'+str(d_Hmax)+'_H1_
 fig, ax3 = plt.subplots()
 k_1_range = np.geomspace(0.1, 10, 50)
 ticks = np.append(k_1_range, 10)
-ax3 = sns.heatmap((slopeH2), cmap="BrBG", square=True, cbar=False, vmin=-0.04, vmax=0.04)
+ax3 = sns.heatmap((slopeH2), cmap="BrBG", square=True, cbar=False, vmin=-0.2, vmax=0.2)
 cbar3 = ax3.figure.colorbar(ax3.collections[0])
 cbar3.set_label('$H_2$', rotation=270, labelpad=12)
 ax3.set_xticks(np.linspace(0, len(k_1_range), 3))
@@ -147,4 +147,4 @@ plt.grid(color='black', linewidth=0.5, linestyle='--')
 plt.xlabel('$k_1$')
 plt.ylabel('$k_2$')
 plt.title('Growth rate of $H_2$ \n $d_{H_{max}} = $' + str(d_Hmax) + ', H2 invader')
-plt.savefig('./output/turingtalk230926/sinvasion_growthrateV3_'+str(d_Hmax)+'_H2_log.png')
+plt.savefig('./output/turingtalk230926/invasion_growthrateV3_'+str(d_Hmax)+'_H2_log.png')
