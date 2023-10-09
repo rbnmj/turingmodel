@@ -44,8 +44,8 @@ k_1_range = np.geomspace(0.1, 10, 50)#100)
 k_2_range = np.geomspace(0.1, 10, 50)#100)
 
 # maximum dispersal rate
-d_Hmax1 = 6*10**-3
-d_Hmax2 = 6*10**-3
+d_Hmax1 = 10**-2
+d_Hmax2 = 10**-2
 
 # var = [N_a, N_b, A_a, A_b, H_1a, H_1b, H_2a, H_2b]
 var0 = [2, 2.5, 2.5, 2, 0.08, 0.4, 10**-6, 0, 0, 0, 0, 0, 0, 0]
@@ -83,14 +83,14 @@ for k_2 in tqdm(k_2_range):
     i += 1
 
 # saving results
-np.savetxt("./data/growthrate/5103/H1Slope510-3.csv", slopeH1, delimiter=",")
-np.savetxt("./data/growthrate/5103/H2Slope510-3.csv", slopeH2, delimiter=",")
+np.savetxt("./data/growthrate/102/H1Slope10-2.csv", slopeH1, delimiter=",")
+np.savetxt("./data/growthrate/102/H2Slope10-2.csv", slopeH2, delimiter=",")
 
 # # loading results
 # slopeH1 = np.loadtxt("./data/growthrateV3_10-3/H1Slope10-3_logV2.csv", delimiter=",")
 # slopeH2 = np.loadtxt("./data/growthrateV3_10-3/H2Slope10-3_logV2.csv", delimiter=",")
 
-d_Hmax = "510-3"
+d_Hmax = "10-2"
 
 # plotting
 k_1_range = np.geomspace(0.1, 10, 100)
