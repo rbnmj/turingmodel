@@ -10,7 +10,6 @@ import ipywidgets
 from tqdm import tqdm
 import os
 
-
 class TuringModel:
     def __init__(self, var, t, k_1, k_2, d_Hmax1, d_Hmax2):
         self.S = 4.8  # Nutrient supply concentration
@@ -67,6 +66,7 @@ class TuringModel:
         # dispersal rates of competitors
         d_H1a = self.d_Hmax1 / (1 + np.exp(self.k_1 * (A_a - x_01)))
         d_H1b = self.d_Hmax1 / (1 + np.exp(self.k_1 * (A_b - x_01)))
+
         d_H2a = self.d_Hmax2 / (1 + np.exp(self.k_2 * (A_a - x_02)))
         d_H2b = self.d_Hmax2 / (1 + np.exp(self.k_2 * (A_b - x_02)))
 
