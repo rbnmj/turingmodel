@@ -31,7 +31,7 @@ plt.xscale('log')
 plt.xlabel('Autotroph density')
 plt.ylabel('Dispersal rate of the heterotroph')
 plt.legend()
-plt.savefig('./output/dispersalrate_over_autotrophdensity.png')
+#plt.savefig('./output/dispersalrate_over_autotrophdensity.png')
 plt.show()
 
 
