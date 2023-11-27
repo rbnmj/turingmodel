@@ -40,12 +40,12 @@ number_steps = 20000
 t = np.linspace(0, t_end, number_steps)
 
 # dispersal adaptability
-k_1_range = np.geomspace(0.1, 10, 50)#100)
-k_2_range = np.geomspace(0.1, 10, 50)#100)
+k_1_range = np.geomspace(0.1, 10, 100)#100)
+k_2_range = np.geomspace(0.1, 10, 100)#100)
 
 # maximum dispersal rate
-d_Hmax1 = 10**0
-d_Hmax2 = 10**0
+d_Hmax1 = 5*10**-3
+d_Hmax2 = 5*10**-3
 
 # var = [N_a, N_b, A_a, A_b, H_1a, H_1b, H_2a, H_2b]
 var0 = [2, 2.5, 2.5, 2, 0.08, 0.4, 10**-6, 0, 0, 0, 0, 0, 0, 0]
@@ -90,10 +90,10 @@ np.savetxt("./data/growthrate/100/H2Slope10-0.csv", slopeH2, delimiter=",")
 # slopeH1 = np.loadtxt("./data/growthrateV3_10-3/H1Slope10-3_logV2.csv", delimiter=",")
 # slopeH2 = np.loadtxt("./data/growthrateV3_10-3/H2Slope10-3_logV2.csv", delimiter=",")
 
-d_Hmax = "10-0"
+d_Hmax = "10-3"
 
 # plotting
-k_1_range = np.geomspace(0.1, 10, 50)
+k_1_range = np.geomspace(0.1, 10, 100)
 ticks = np.append(k_1_range, 10)
 
 # # total change
