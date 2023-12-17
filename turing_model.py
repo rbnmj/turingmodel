@@ -46,8 +46,10 @@ class TuringModel:
         d_H2a = var[9]
         d_H1b = var[10]
         d_H2b = var[11]
-        H1_loss = var[12]
-        H2_loss = var[13]
+        g_1a = var[12]
+        g_1b = var[13]
+        g_2a = var[14]
+        g_2b = var[15]
 
         # growth rate of autotrophs
         r_a = (self.r_max * N_a) / (self.N_h + N_a)
@@ -91,7 +93,8 @@ class TuringModel:
         H2_loss = d_H2a - (d_H2a * dH_2a) / \
             (1 + np.exp(self.k_2 * (A_a - x_02)))
 
-        return (dN_a, dN_b, dA_a, dA_b, dH_1a, dH_1b, dH_2a, dH_2b, d_H1a, d_H2a, d_H1b, d_H2b, H1_loss, H2_loss)
+        #return (dN_a, dN_b, dA_a, dA_b, dH_1a, dH_1b, dH_2a, dH_2b, d_H1a, d_H2a, d_H1b, d_H2b, g_2a, g_2b)
+        return (dN_a, dN_b, dA_a, dA_b, dH_1a, dH_1b, dH_2a, dH_2b, d_H1a, d_H2a, d_H1b, d_H2b, g_1a, g_1b, g_2a, g_2b)
 
     def equations_wrapper(var, t, model):
         return model._equations(var, t)
