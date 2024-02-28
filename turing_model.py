@@ -50,7 +50,7 @@ class TuringModel:
         g_1b = var[13]
         g_2a = var[14]
         g_2b = var[15]
-
+        
         # growth rate of autotrophs
         r_a = (self.r_max * N_a) / (self.N_h + N_a)
         r_b = (self.r_max * N_b) / (self.N_h + N_b)
@@ -60,7 +60,7 @@ class TuringModel:
         g_1b = (self.a_1 * A_b) / (1 + self.a_1 * self.h * A_b)
         g_2a = (self.a_2 * A_a) / (1 + self.a_2 * self.h * A_a)
         g_2b = (self.a_2 * A_b) / (1 + self.a_2 * self.h * A_b)
-
+        
         # inflection points
         x_01 = self.D / (self.a_1 * (self.e - self.h * self.D))
         x_02 = self.D / (self.a_2 * (self.e - self.h * self.D))
@@ -68,7 +68,6 @@ class TuringModel:
         # dispersal rates of competitors
         d_H1a = self.d_Hmax1 / (1 + np.exp(self.k_1 * (A_a - x_01)))
         d_H1b = self.d_Hmax1 / (1 + np.exp(self.k_1 * (A_b - x_01)))
-
         d_H2a = self.d_Hmax2 / (1 + np.exp(self.k_2 * (A_a - x_02)))
         d_H2b = self.d_Hmax2 / (1 + np.exp(self.k_2 * (A_b - x_02)))
 
@@ -92,7 +91,7 @@ class TuringModel:
             (1 + np.exp(self.k_1 * (A_a - x_01)))
         H2_loss = d_H2a - (d_H2a * dH_2a) / \
             (1 + np.exp(self.k_2 * (A_a - x_02)))
-
+        
         #return (dN_a, dN_b, dA_a, dA_b, dH_1a, dH_1b, dH_2a, dH_2b, d_H1a, d_H2a, d_H1b, d_H2b, g_2a, g_2b)
         return (dN_a, dN_b, dA_a, dA_b, dH_1a, dH_1b, dH_2a, dH_2b, d_H1a, d_H2a, d_H1b, d_H2b, g_1a, g_1b, g_2a, g_2b)
 
