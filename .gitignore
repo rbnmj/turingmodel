@@ -1,7 +1,8 @@
-/.archive
-/.data_old
-/.modellib
-/.devcontainer
-/.git
-/.output
-/.vscode
+.archive/
+.data_old/
+.modellib/
+.devcontainer/
+.git/
+.output/
+.vscode/
+/.gitignore
