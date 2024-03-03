@@ -1,13 +1,4 @@
 import numpy as np
-from scipy import integrate as integ
-from scipy import signal as signal
-import sympy as sp
-import matplotlib
-from matplotlib.lines import Line2D
-from matplotlib import pyplot as plt
-import seaborn as sns
-import ipywidgets
-from tqdm import tqdm
 import os
 
 class TuringModel:
